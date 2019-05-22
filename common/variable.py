@@ -36,6 +36,7 @@ class GetVariable(object):
     FOXFIRE = "foxfire"
     CHROME = "chrome"
 
+
     #操作类型
     CLICK = "click"
     SEND_KEYS = "send_keys"
