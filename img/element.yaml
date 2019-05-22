@@ -1,0 +1,25 @@
+---
+-
+  element_info: android.widget.EditText
+  element_id: 1
+  find_type: class_names
+  enable: 0
+  index: 0
+-
+  element_info: android.widget.EditText
+  element_id: 2
+  find_type: class_names
+  index: 1
+  enable: 0
+-
+  element_info: com.unovo.apartment.manager.dev:id/btnLogin
+  element_id: 3
+  find_type: by_id
+  enable: 0
+  index: 0
+-
+  element_info: com.unovo.apartment.manager.dev:id/toolbar_title
+  element_id: 4
+  find_type: by_id
+  enable: 0
+  index: 0
