@@ -23,10 +23,12 @@ from testBLL import report as b_report
 from testDAL import HTMLTestRunner
 import sys
 import os
+from common import logger
 # 增加cmd执行路径引导
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
+testLog = logger.Logger("../../../Logs/all.log")
 '''
 获取driver信息
 '''
@@ -75,11 +77,15 @@ def runnerPool():
         t['appActivity'] = ga['appium'][i]['appActivity']
         l_pool.append(t)
         devices_Pool.append(l_pool)
+        testLog.logger.info("获取驱动启动信息")
     pool = Pool(len(devices_Pool))
     # for i in range(2):
     #     pool.apply_async(sample_request, args=(t[i],)) # 异步
+    testLog.logger.info("开始执行测试线程")
     pool.map(runnerCaseApp, devices_Pool)
+    testLog.logger.info("测试线程执行完成")
     pool.close()
+    testLog.logger.info("测试完成，线程结束")
     pool.join()
 
 '''
@@ -90,16 +96,20 @@ def runnerCaseApp(l_devices):
     starttime = datetime.datetime.now()
     suite = unittest.TestSuite()
     # suite.addTest(TestInterfaceCase.parametrize(testLogin1, l_devices=l_devices))
+    testLog.logger.info("开始加载用例")
     suite.addTest(TestInterfaceCase.parametrize(testLogin2, l_devices=l_devices))
     # suite.addTest(testLogin1.home_login())
     # suite.addTest(testLogin2.home_login())
-    fp = open("res.html", "wb")
+    testLog.logger.info("用例加载完成")
+    fp = open("../../../report/res.html", "wb")
+    testLog.logger.info("开始运行用例池")
     HTMLTestRunner.HTMLTestRunner(stream=fp, title='all_tests', description='所有测试情况').run(suite)
+    testLog.logger.info("用例运行完成，准备输出报告")
     endtime = datetime.datetime.now()
     get_common_report(start_test_time, endtime, starttime)
     report()
 def report():
-    workbook = xlsxwriter.Workbook('GetReport.xlsx')
+    workbook = xlsxwriter.Workbook('../../../report/GetReport.xlsx')
     worksheet = workbook.add_worksheet("测试总况")
     worksheet2 = workbook.add_worksheet("测试详情")
     print(data)
@@ -112,14 +122,16 @@ def report():
 '''
 if __name__ == '__main__':
     ga = get_devices()
+    testLog.logger.info("获取驱动信息")
     if adbCommon.attached_devices():
         appium_server = server.AppniumServer(ga)
         appium_server.stop_server()
         appium_server.start_server()
+        testLog.logger.info("启动appium服务")
         while not appium_server.is_runnnig():
             time.sleep(2)
         runnerPool()
         appium_server.stop_server()
+        testLog.logger.info("停止appium服务")
     else:
-        print("设备不存在")
-    # runnerCaseApp("1")
+        testLog.logger.warning("设备不存在")

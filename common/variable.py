@@ -53,7 +53,7 @@ class GetVariable(object):
     # 配置文件地址
     COMMONELEMENT = "../img/demo.xlsx"
     # 报告输出地址
-    REPORT_INFO_PATH = "F:/info.txt"
+    REPORT_INFO_PATH = "../../../Logs/info.txt"
     REPORT_INIT = "F:/init.txt"
-    REPORT_COLLECT_PATH = "F:/collect.txt"
-    SCREEN_IMG_PATH = "F:/img/" # 截图地址
+    REPORT_COLLECT_PATH = "../../../Logs/collect.txt"
+    SCREEN_IMG_PATH = "../../../report/failImg/" # 截图地址

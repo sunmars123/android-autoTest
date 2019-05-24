@@ -187,7 +187,7 @@ def set_row(worksheet, num, height):
 #  'test_sum_date': '24秒', 'app_name': "'monkneyTest'", 'test_success': 2, 'app_size': '0M',
 #  'init': [{'phone_avg_use_raw': '8%', 'phone_pix': ' 1080x1920\n', 'phone_avg_use_cpu': '0%', 'fps_avg': '0.00', 'fps_max': '0.0', 'phone_raw': '3014M', 'phone_name': 'Huawei_H60-L02_android_4.4.2', 'phone_avg_max_use_cpu': '0.0%', 'phone_max_use_raw': '23M', 'phone_cpu': '8核'}, {'phone_name': 'Huawei_H60-L02_android_4.4.2', 'phone_pix': ' 1080x1920\n', 'phone_avg_use_cpu': '0', 'fps_avg': '0', 'fps_max': '0', 'phone_raw': '3014M', 'phone_avg_use_raw': '0', 'phone_cpu': '8核', 'phone_max_use_raw': '0', 'phone_avg_max_use_cpu': '0'}],
 # 'test_sum': 3, 'app_version': "'1.0'"}
-#     workbook = xlsxwriter.Workbook('GetReport.xlsx')
+#     workbook = xlsxwriter.Workbook('../../../report/GetReport.xlsx')
 #     worksheet = workbook.add_worksheet("测试总况")
 #     worksheet2 = workbook.add_worksheet("测试详情")
 #     bc = OperateReport(wd=workbook, data=data)
