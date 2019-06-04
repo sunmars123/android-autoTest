@@ -13,7 +13,7 @@ from common import test_class as o
 def getYam(homeyaml):
     try:
         with open(homeyaml, encoding='utf-8') as f:
-            x = yaml.load(f)
+            x = yaml.load(f, Loader=yaml.FullLoader)
             return x
     except FileNotFoundError:
         print("文件没找到")
@@ -31,4 +31,3 @@ def getYam(homeyaml):
 #     }
 #     return d['a']()
 # print(add(1,2))
-getYam("C://Users//17673//PycharmProjects//Appnium//testCase//yaml//login//home_login.yaml")

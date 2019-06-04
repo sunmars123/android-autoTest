@@ -15,7 +15,7 @@ import time
 from multiprocessing import Pool
 import datetime
 import unittest
-from testCase.login2 import testLogin2
+from testCase.login import testLogin
 from testRunner.runnerBase import TestInterfaceCase
 from common import OperateFile
 from common.variable import GetVariable as common
@@ -97,7 +97,7 @@ def runnerCaseApp(l_devices):
     suite = unittest.TestSuite()
     # suite.addTest(TestInterfaceCase.parametrize(testLogin1, l_devices=l_devices))
     testLog.logger.info("开始加载用例")
-    suite.addTest(TestInterfaceCase.parametrize(testLogin2, l_devices=l_devices))
+    suite.addTest(TestInterfaceCase.parametrize(testLogin, l_devices=l_devices))
     # suite.addTest(testLogin1.home_login())
     # suite.addTest(testLogin2.home_login())
     testLog.logger.info("用例加载完成")
@@ -121,7 +121,6 @@ def report():
 函数主方法
 '''
 if __name__ == '__main__':
-    ga = get_devices()
     testLog.logger.info("获取驱动信息")
     if adbCommon.attached_devices():
         appium_server = server.AppniumServer(ga)

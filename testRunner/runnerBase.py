@@ -18,8 +18,8 @@ def appnium_testcase(l_devices):
     derired_caps = {}
     derired_caps['platformName'] = l_devices['platformName']
     derired_caps['platformVersion'] = l_devices['platformVersion']
-    derired_caps['appPackage'] = apk_base.get_apk_pkg()
-    derired_caps['appActivity'] = apk_base.get_apk_activity()
+    derired_caps['appPackage'] = l_devices['appPackage']
+    derired_caps['appActivity'] = l_devices['appActivity']
     derired_caps['deviceName'] = l_devices['deviceName']
     remote = "http://127.0.0.1:4723/wd/hub"
     driver = webdriver.Remote(remote, derired_caps)

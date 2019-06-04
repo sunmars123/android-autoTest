@@ -25,12 +25,12 @@ class Element:
             row = sheet.row_values(i)
             dic_value = {}
             if i!= 0:
-                dic_value ["element_id"] = int(row[0])
-                dic_value ["element_info"] = row[1]
-                dic_value ["find_type"] = row[2]
-                dic_value ["index"] = int(row[3])
-                dic_value ["enable"] = int(row[4])
-                dic[int(row[0])] = dic_value
+                dic_value ["element_id"] = row[5]
+                dic_value ["element_info"] = row[6]
+                dic_value ["find_type"] = row[7]
+                dic_value ["index"] = int(row[8])
+                dic_value ["enable"] = int(row[9])
+                dic[row[5]] = dic_value
         return dic
     '''
     判断用例元素的元素编号是否存在元素库

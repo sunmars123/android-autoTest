@@ -17,10 +17,10 @@ from testMode import appCase as m_app_case
 from testRunner.runnerBase import TestInterfaceCase as te
 # from testBLL import apkBase
 import time
-class testLogin1(te):
+class testLogin(te):
     # 测试前需要执行得操作
     def setUp(self):
-        super(testLogin1, self).setUp()
+        super(testLogin, self).setUp()
         time.sleep(2)
         self.bc = b_app_case.GetAppCase(test_module="我的", GetAppCaseInfo=m_app_case.GetAppCaseInfo, GetAppCase=m_app_case.GetAppCase,
                                         driver=self.driver, devices=self.l_devices["deviceName"])
@@ -30,12 +30,7 @@ class testLogin1(te):
     # 单点登陆这里特殊处理,不同的设备调用不同的case
     def home_login(self):
         home_logon_yaml = PATH("yaml/login/home_login.yaml")
-        # if self.l_devices["deviceName"] == "GWY0217113000393":
-        #     home_logon_yaml = PATH("yaml/login/home_login.yaml")
-        # if self.l_devices["deviceName"] == "MSM8926":
-        #     home_logon_yaml = PATH("yaml/myinfo/home_login1.yaml")
-        x = self.bc.execCase(home_logon_yaml, test_name="test_home_login", isLast="0", test_module='我的')
-        self.assertTrue(x)
+        self.bc.execCase(home_logon_yaml, test_name="test_home_login", isLast="0", test_module='我的')
     # def get_apk_pkg(self):
     #     return apkBase.apkInfo(PATH("../img/com.unovo.apartment.manager.dev.apk")).get_apk_pkg()
 

@@ -1,22 +1,18 @@
 ---
 -
-  element_info: android.widget.EditText
-  find_type: class_names
+  element_id: LYO_login_Editbox_phone
   operate_type: send_keys
-  test_id: 1
-  test_intr: 登录
-  text: 17673637740
-  index: 0
+  test_no: 2
+  test_describe: 登录
+  data_input: 17673637740
+  test_module: 我的
 -
-  element_info: android.widget.EditText
-  find_type: class_names
+  element_id: LYO_login_Editbox_password
   operate_type: send_keys
-  text: Ct123456
-  index: 1
+  data_input: Ct123456
 -
-  element_info: com.unovo.apartment.manager.dev:id/btnLogin
-  find_type: by_id
+  element_id: LYO_login_Button_login
   operate_type: click
+  data_input:
 -
-  element_info: com.unovo.apartment.manager.dev:id/toolbar_title
-  find_type: by_id
+  element_id: LYO_login_SelectOperator_Button_SelectOperator

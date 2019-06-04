@@ -116,9 +116,9 @@ class OperateReport:
         temp = 3
         # 遍历根据默认格式写入内容至测试详情
         for item in self.data["info"]:
-            _write_center(worksheet, "A"+str(temp), item["test_id"], self.wd)
+            _write_center(worksheet, "A"+str(temp), item["test_no"], self.wd)
             _write_center(worksheet, "B"+str(temp), item["test_module"], self.wd)
-            _write_center(worksheet, "C"+str(temp), item["test_intr"], self.wd)
+            _write_center(worksheet, "C"+str(temp), item["test_describe"], self.wd)
             _write_center(worksheet, "D"+str(temp), item["test_name"], self.wd)
             _write_center(worksheet, "E"+str(temp), item["test_result"], self.wd)
             _write_center(worksheet, "F"+str(temp), item["test_reason"], self.wd)
@@ -183,7 +183,7 @@ def set_row(worksheet, num, height):
 
 # if __name__ == '__main__':
 #     data ={'test_date': '2016-12-01 15:58 PM', 'test_failed': 1,
-#  'info': [{'test_men_avg': '8%', 'test_cpu_avg': '0%', 'test_fps_avg': '0.00', 'test_name': 'test_home_feed', 'test_cpu_max': '0.0%', 'test_intr': '闪退测试', 'test_reason': None, 'test_phone_name': 'Huawei_H60-L02_android_4.4.2', 'test_men_max': '23M', 'test_image': None, 'test_module': '闪退测试', 'test_log': None, 'test_fps_max': '0.0', 'test_id': 1001, 'test_result': '成功'}, {'test_men_avg': '4%', 'test_cpu_avg': '23%', 'test_fps_avg': '0.00', 'test_name': 'test_home_feed', 'test_cpu_max': '46.0%', 'test_intr': '闪退测试', 'test_reason': '崩溃了', 'test_phone_name': 'Huawei_H60-L02_android_4.4.2', 'test_men_max': '23M', 'test_image': None, 'test_module': '闪退测试', 'test_log': 'd://storage/emulated/0/crash/2016-12-01-15-58-48.log', 'test_fps_max': '0.0', 'test_id': 1001, 'test_result': '失败'}],
+#  'info': [{'test_men_avg': '8%', 'test_cpu_avg': '0%', 'test_fps_avg': '0.00', 'test_name': 'test_home_feed', 'test_cpu_max': '0.0%', 'test_describe': '闪退测试', 'test_reason': None, 'test_phone_name': 'Huawei_H60-L02_android_4.4.2', 'test_men_max': '23M', 'test_image': None, 'test_module': '闪退测试', 'test_log': None, 'test_fps_max': '0.0', 'test_id': 1001, 'test_result': '成功'}, {'test_men_avg': '4%', 'test_cpu_avg': '23%', 'test_fps_avg': '0.00', 'test_name': 'test_home_feed', 'test_cpu_max': '46.0%', 'test_intr': '闪退测试', 'test_reason': '崩溃了', 'test_phone_name': 'Huawei_H60-L02_android_4.4.2', 'test_men_max': '23M', 'test_image': None, 'test_module': '闪退测试', 'test_log': 'd://storage/emulated/0/crash/2016-12-01-15-58-48.log', 'test_fps_max': '0.0', 'test_id': 1001, 'test_result': '失败'}],
 #  'test_sum_date': '24秒', 'app_name': "'monkneyTest'", 'test_success': 2, 'app_size': '0M',
 #  'init': [{'phone_avg_use_raw': '8%', 'phone_pix': ' 1080x1920\n', 'phone_avg_use_cpu': '0%', 'fps_avg': '0.00', 'fps_max': '0.0', 'phone_raw': '3014M', 'phone_name': 'Huawei_H60-L02_android_4.4.2', 'phone_avg_max_use_cpu': '0.0%', 'phone_max_use_raw': '23M', 'phone_cpu': '8核'}, {'phone_name': 'Huawei_H60-L02_android_4.4.2', 'phone_pix': ' 1080x1920\n', 'phone_avg_use_cpu': '0', 'fps_avg': '0', 'fps_max': '0', 'phone_raw': '3014M', 'phone_avg_use_raw': '0', 'phone_cpu': '8核', 'phone_max_use_raw': '0', 'phone_avg_max_use_cpu': '0'}],
 # 'test_sum': 3, 'app_version': "'1.0'"}

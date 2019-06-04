@@ -115,7 +115,7 @@ def send_keys(mOperate, cts):
     :return: 执行操作
     '''
     if mOperate["find_type"] == common.find_element_by_id or mOperate["find_type"] == common.find_element_by_xpath or mOperate["find_type"] == common.find_element_by_name or common.find_elements_by_class_name:
-        elements_by(mOperate, cts).send_keys(mOperate["text"])
+        elements_by(mOperate, cts).send_keys(mOperate["data_input"])
 # 输入验证码，根据睡眠时间时间人工输入内容
 def send_code():
     time.sleep(10)

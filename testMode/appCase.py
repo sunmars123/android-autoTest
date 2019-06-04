@@ -20,15 +20,15 @@ class GetAppCase(Model):
     time = IntType() # 配合与滑动操作
     name = StringType()
     index = IntType()
-    text = StringType()# 输入信息
+    data_input = StringType()# 输入信息
     log = StringType() # 本地log信息路径，一般由手机名字_型号构成
 
 '''
 用例的基本信息
 '''
 class GetAppCaseInfo(Model):
-    test_id = StringType() # 用例的id
-    test_intr = StringType() # 用例的介绍
+    test_no = StringType() # 用例的id
+    test_describe = StringType() # 用例的介绍
     test_name = StringType() # 用例的名字
     test_result =StringType() # 用例的结果
     test_reason = StringType() # 用例失败的理由

@@ -36,8 +36,8 @@ class AppCase():
         gh = operateYaml.getYam(f)
         for i in range(len(gh)):
             if i  == 0 :
-                self.GetAppCaseInfo.test_id = gh[i].get("test_id", "false")
-                self.GetAppCaseInfo.test_intr = gh[i].get("test_intr", "false")
+                self.GetAppCaseInfo.test_no = gh[i].get("test_no", "false")
+                self.GetAppCaseInfo.test_describe = gh[i].get("test_describe", "false")
                 # self.GetAppCaseInfo.test_module = gh[i].get("test_module", "false")
                 # bt = self.GetAppCase
             self.GetAppCase.element_info = gh[i].get("element_info", "false")
@@ -47,7 +47,7 @@ class AppCase():
             # 操作类型
             self.GetAppCase.operate_type = gh[i].get("operate_type", "false")
             # 输入文字
-            self.GetAppCase.text = gh[i].get("text", "false")  # 对应by_link_text
+            self.GetAppCase.data_input = gh[i].get("data_input", "false")  # 对应by_link_text
 
             # 验证类型
             self.GetAppCase.find_type = gh[i].get("find_type", "false")
