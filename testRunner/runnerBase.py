@@ -9,7 +9,9 @@ from common.variable import GetVariable as common
 from appium import webdriver
 from testBLL import apkBase
 import unittest
-
+from common import logger
+import sys
+testLog = logger.Logger("../../../Logs/all.log", level="debug")
 '''
 提供一个获取driver对象的函数
 '''
@@ -56,6 +58,7 @@ class TestInterfaceCase(unittest.TestCase):
     def parametrize(testcase_klass, l_devices=None):
         testloader = unittest.TestLoader()
         testnames = testloader.getTestCaseNames(testcase_klass)
+        testLog.logger.debug("testCases:{0}".format(testnames))
         suite = unittest.TestSuite()
         for name in testnames:
             suite.addTest(testcase_klass(name, l_devices=l_devices[0]))

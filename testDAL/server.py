@@ -10,6 +10,8 @@ import os
 import urllib.request
 from multiprocessing import Process
 from urllib.error import URLError
+from common import logger
+testLog = logger.Logger("../../../Logs/all.log", level="debug")
 class AppniumServer:
     def __init__(self, l_devices):
         self.l_devices = l_devices
@@ -25,12 +27,14 @@ class AppniumServer:
             t1 = RunServer(self.l_devices['appium'][i]['config'])
             p = Process(target=t1.start())
             p.start()
+        testLog.logger.debug("启动appium服务")
     def stop_server(self):
         """stop the appium server
         selenium_appium: appium selenium
         :return:
         """
         os.system('taskkill /f /im  node.exe')
+        testLog.logger.debug("停止appium服务")
     def is_runnnig(self):
         """Determine whether server is running
         :return:True or False

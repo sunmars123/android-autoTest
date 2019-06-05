@@ -5,7 +5,6 @@
 # @Site :  
 # @File : report.py 
 # @Software: PyCharm
-import xlsxwriter
 class OperateReport:
     def __init__(self, wd, data):
         self.wd = wd

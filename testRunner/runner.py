@@ -28,7 +28,7 @@ from common import logger
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
-testLog = logger.Logger("../../../Logs/all.log")
+testLog = logger.Logger("../../../Logs/all.log", level="debug")
 '''
 获取driver信息
 '''
@@ -36,6 +36,7 @@ PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 def get_devices():
+    testLog.logger.info("获取驱动信息")
     return operateYaml.getYam("../devices.yaml")
 ga = get_devices()
 
@@ -121,16 +122,13 @@ def report():
 函数主方法
 '''
 if __name__ == '__main__':
-    testLog.logger.info("获取驱动信息")
     if adbCommon.attached_devices():
         appium_server = server.AppniumServer(ga)
         appium_server.stop_server()
         appium_server.start_server()
-        testLog.logger.info("启动appium服务")
         while not appium_server.is_runnnig():
             time.sleep(2)
         runnerPool()
         appium_server.stop_server()
-        testLog.logger.info("停止appium服务")
     else:
         testLog.logger.warning("设备不存在")

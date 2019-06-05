@@ -7,6 +7,9 @@
 # @Software: PyCharm
 import os
 import re
+import sys
+from common import logger
+testLog = logger.Logger("../../../Logs/all.log")
 '''
 获取app信息模块工具类，功能：得到应用名称、得到包名、得到启动类名
 '''
@@ -17,6 +20,7 @@ class ApkInfo():
 
     #得到应用名字
     def get_apk_name(self):
+        testLog.logger.debug("run function ==> %s"% sys._getframe().f_code.co_name)
         cmd = "aapt dump badging " + self.apkpath + " | grep application-label: "
         result = ""
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE,
@@ -29,6 +33,7 @@ class ApkInfo():
 
     # 得到包名
     def get_apk_pkg(self):
+        testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
         cmd = "aapt dump badging %s" % self.apkpath
         results = os.popen(cmd, 'r')
         a = ""
@@ -42,6 +47,7 @@ class ApkInfo():
 
     #得到启动类
     def get_apk_activity(self):
+        testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
         cmd = "aapt dump badging %s" % self.apkpath
         results = os.popen(cmd, 'r')
         a = ""

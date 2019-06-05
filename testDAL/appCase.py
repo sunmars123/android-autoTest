@@ -6,16 +6,15 @@
 # @File : appCase.py 
 # @Software: PyCharm
 import json
-import os
 from common import operateYaml
-from testMode import appCase
 from common import operateElement as bo
-import sys
 from common import OperateFile as operateFile
 from common.variable import GetVariable as common
 from common import testLogScreen
-import time
 from common.commonElemnt import Element as element
+import sys
+from common import logger
+testLog = logger.Logger("../../../Logs/all.log", level="debug")
 class AppCase():
     def __init__(self, **kwargs):
         '''
@@ -32,6 +31,8 @@ class AppCase():
         # self.test_module = kwargs['test_module']
         self.driver = kwargs["driver"]
     def getModeList(self, f):
+        testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
+        testLog.logger.debug("==> param:{0}".format(f))
         bs = []
         gh = operateYaml.getYam(f)
         for i in range(len(gh)):
@@ -55,8 +56,11 @@ class AppCase():
             self.GetAppCase.time = gh[i].get("time", 0)
 
             bs.append(json.loads(json.dumps(self.GetAppCase().to_primitive())))
+        testLog.logger.debug("testConter:{0}".format(bs))
         return bs
     def execCase(self, f, **kwargs):
+        testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
+        testLog.logger.debug("==> param:{0},{1}".format(f, kwargs))
         '''
 
         :param f: 用例文件
@@ -104,6 +108,8 @@ class AppCase():
         self.report(go, ch_check, _d_report_common, kwargs)
     # 整体用例运行
     def report(self, go, ch_check, _d_report_common, kwargs):
+        testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
+        testLog.logger.debug("==> param:{0},{1},{2},{3}".format(go, ch_check, _d_report_common, kwargs))
         if go.findElement(ch_check):
             _d_report_common["test_success"] += 1
             self.GetAppCaseInfo.test_result = "成功"
@@ -148,10 +154,14 @@ class AppCase():
     读取文件执行结果
     '''
     def read_detail_report(self, f=""):
+       testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
+       testLog.logger.debug("==> param:{0}".format(f))
        op = operateFile.OperateFile(f, "r")
        return op.read_txt_row()
     # 写入统计case的info,init情况,累计执行结果到列表中
     def write_detail(self, json, f="", key="info"):
+        testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
+        testLog.logger.debug("==> param:{0},{1},{2}".format(json, f, key))
         '''
 
         :param json: 存储的json
@@ -175,6 +185,8 @@ class AppCase():
 
     # 写入统计总的case的运行次数
     def write_report_collect(self, json, f=""):
+        testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
+        testLog.logger.debug("==> param:{0},{1}".format(json, f))
         _read_json_temp = self.read_detail_report(f)
         op = operateFile.OperateFile(f, "w")
         _result = {}

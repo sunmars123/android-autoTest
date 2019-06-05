@@ -20,4 +20,5 @@ logging.warning('warning 信息')
 logging.error('error 信息')
 logging.critical('critial 信息')
 print(1)
+print(1)
 
