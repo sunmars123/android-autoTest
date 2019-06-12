@@ -29,7 +29,7 @@ class testLogin(te):
 
     # 单点登陆这里特殊处理,不同的设备调用不同的case
     def home_login(self):
-        home_logon_yaml = PATH("yaml/login/home_login.yaml")
+        home_logon_yaml = PATH("yaml/ly/login/home_login.yaml")
         self.bc.execCase(home_logon_yaml, test_name="test_home_login", isLast="0", test_module='我的')
     # def get_apk_pkg(self):
     #     return apkBase.apkInfo(PATH("../img/com.unovo.apartment.manager.dev.apk")).get_apk_pkg()
