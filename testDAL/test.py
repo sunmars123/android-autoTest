@@ -5,8 +5,7 @@
 # @Site :  
 # @File : testUnittest.py
 # @Software: PyCharmbuyu
-from testMode import appCase
-from testDAL import appCase
+from testDAL import apkBase
 # l = [{"a":123}, {"test_id":456}]
 # d = appCase.AppCase(GetAppCaseInfo=appCase.AppCase)
 #
@@ -14,3 +13,8 @@ from testDAL import appCase
 d = {'element_id': 1, 'element_info': 'android.widget.EditText', 'find_type': 'class_names', 'index': 0.0, 'enable': 0.0}
 x = {'element_info': 'false', 'element_id': 1, 'enable': 'false', 'operate_type': 'send_keys', 'msg': None, 'find_type': 'false', 'time': 0, 'name': None, 'index': 'false', 'data_input': 17673637740, 'log': None}
 x.update(d)
+x = apkBase.ApkInfo("../img/com.unovo.apartment.manager.dev.apk");
+a = x.get_apk_pkg()
+b = x.get_apk_activity()
+print(a)
+print(b)

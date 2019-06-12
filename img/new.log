@@ -1,5 +1,0 @@
-2019-05-23 16:55:59,554 - E:/AT/Script/Appnium/img/test.py[line:17] - DEBUG: debug 信息
-2019-05-23 16:55:59,555 - E:/AT/Script/Appnium/img/test.py[line:18] - INFO: info 信息
-2019-05-23 16:55:59,555 - E:/AT/Script/Appnium/img/test.py[line:19] - WARNING: warning 信息
-2019-05-23 16:55:59,555 - E:/AT/Script/Appnium/img/test.py[line:20] - ERROR: error 信息
-2019-05-23 16:55:59,555 - E:/AT/Script/Appnium/img/test.py[line:21] - CRITICAL: critial 信息

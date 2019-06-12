@@ -4,5 +4,3 @@ appium:
    config: node "C:\Program Files (x86)\Appium\node_modules\appium\bin\appium.js"  -p 4723 -bp 4733 -U 127.0.0.1:62001
    platformName: android
    platformVersion: 7.0
-   appPackage: com.unovo.apartment.manager.dev
-   appActivity: com.lianyuplus.login.ui.StartActivity

@@ -39,11 +39,15 @@ class ApkInfo():
         a = ""
         while 1:
             line = results.readline()
+            print(line)
             if not line: break
             a += line
         results.close()
         result1 = re.findall(".*package: name='(.+?)' versionCode='.*", a)
-        return result1[0]
+        if len(result1) >0:
+            return result1[0]
+        testLog.logger.error("未找到包名")
+        return 0
 
     #得到启动类
     def get_apk_activity(self):
@@ -58,7 +62,10 @@ class ApkInfo():
             a += line
         results.close()
         result1 = re.findall(".*launchable-activity: name='(.+?)'  label='' icon=''.*", a)
-        return result1[0]
+        if len(result1) >0:
+            return result1[0]
+        testLog.logger.error("未找到包名")
+        return 0
 # if __name__ == '__main__':
 #     ApkInfo(r"D:\app\appium_study\img\t.apk").get_apk_pkg()
 #     # ApkInfo(r"D:\app\appium_study\img\t.apk").get_apk_version()
