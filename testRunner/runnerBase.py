@@ -16,7 +16,7 @@ testLog = logger.Logger("../../../Logs/all.log", level="debug")
 提供一个获取driver对象的函数
 '''
 def appnium_testcase(l_devices):
-    apk_base = apkBase.apkInfo("../img/com.unovo.apartment.manager.dev.apk")
+    apk_base = apkBase.apkInfo(common.APKPATH)
     derired_caps = {}
     derired_caps['platformName'] = l_devices['platformName']
     derired_caps['platformVersion'] = l_devices['platformVersion']

@@ -39,7 +39,6 @@ class ApkInfo():
         a = ""
         while 1:
             line = results.readline()
-            print(line)
             if not line: break
             a += line
         results.close()
@@ -55,7 +54,6 @@ class ApkInfo():
         cmd = "aapt dump badging %s" % self.apkpath
         results = os.popen(cmd, 'r')
         a = ""
-        print(results)
         while 1:
             line = results.readline()
             if not line: break

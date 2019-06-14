@@ -82,6 +82,7 @@ class AppCase():
                 if ce.isElemnet(k["element_id"]):
                     k = ce.joinElement(k, k["element_id"])
                     if k["enable"] == 1:
+                        testLog.logger.debug("执行步骤:{0}".format(k))
                         go.opearate_element(k)
                         # if go.findElement(ch_check):
                         #     pass

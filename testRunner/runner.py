@@ -24,6 +24,7 @@ from testDAL import HTMLTestRunner
 import sys
 import os
 from common import logger
+from testBLL import apkBase
 # 增加cmd执行路径引导
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
@@ -66,6 +67,7 @@ def get_common_report(start_test_time, endtime, starttime):
 运行用例池
 '''
 def runnerPool():
+    apk_base = apkBase.apkInfo(common.APKPATH)
     devices_Pool = []
     for i in range(0, len(ga["appium"])):
         l_pool = []
@@ -74,8 +76,8 @@ def runnerPool():
         t["platformVersion"] = ga['appium'][i]['platformVersion']
         t["platformName"] = ga["appium"][i]["platformName"]
         t["port"] = ga["appium"][i]["port"]
-        t['appPackage'] = ga['appium'][i]['appPackage']
-        t['appActivity'] = ga['appium'][i]['appActivity']
+        t['appPackage'] = apk_base.get_apk_pkg()
+        t['appActivity'] = apk_base.get_apk_activity()
         l_pool.append(t)
         devices_Pool.append(l_pool)
         testLog.logger.info("获取驱动启动信息")

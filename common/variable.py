@@ -52,6 +52,7 @@ class GetVariable(object):
 
     # 配置文件地址
     COMMONELEMENT = "../img/demo.xlsx"
+    APKPATH = "../img/lianyuplus-baiyunshen-3.2.0-beta-release-build2019051701.apk"
     # 报告输出地址
     REPORT_INFO_PATH = "../../../Logs/info.txt"
     REPORT_INIT = "F:/init.txt"
