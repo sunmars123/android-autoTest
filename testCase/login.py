@@ -20,6 +20,7 @@ import time
 class testLogin(te):
     # 测试前需要执行得操作
     def setUp(self):
+        super(testLogin, self).quitApp()
         super(testLogin, self).setUp()
         time.sleep(2)
         self.bc = b_app_case.GetAppCase(test_module="登录", GetAppCaseInfo=m_app_case.GetAppCaseInfo, GetAppCase=m_app_case.GetAppCase,
@@ -39,18 +40,15 @@ class testLogin(te):
         self.bc.execCase(home_logon_yaml, test_name="home_login01", isLast="0", test_module='快速登录')
     # 测试用例执行完后所需执行的操作
     def tearDown(self):
-        self.driver.close_app()
+        self.quitApp()
         self.driver.quit()
         pass
     @staticmethod
     def tearDownClass():
         pass
-    # def test_login01(self):
-    #     # self.home_fist_open()
-    #     self.home_login01()
-    def test_login02(self):
-        # self.home_fist_open()
-        self.home_login02()
+    def test_login01(self):
+        self.home_login01()
+    # def test_login02(self):
+    #     self.home_login02()
     # def test_login03(self):
-    #     # self.home_fist_open()
     #     self.home_login03()

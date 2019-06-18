@@ -19,11 +19,11 @@ worksheet = workbook.add_worksheet("test")
 worksheet.set_row(1, 100)
 worksheet.set_row(2, 100)
 # 设置格式
-a = workbook.add_format({'align': 'center','valign': 'vcenter','border':1, 'bold':True, 'bg_color':"blue", 'color':'#ffffff'})
+a = workbook.add_format({'align': 'center','valign': 'vcenter','border':1, 'bold':True, 'bg_color':"blue", 'color':'#ffffff', 'text_wrap':True})
 a2 = workbook.add_format({'align': 'center','valign': 'vcenter','border':1, 'bold':True})
 # 写入单元格内容并插入格式
-worksheet.write("A1", "姓名", a)
-worksheet.write("A5", "", a2)
+worksheet.write("A1", "姓名111111111111111111111111111111111111111111111111111111111111111", a)
+worksheet.write("A5", "姓名111111111111111111111111111111111111111111111111111111111111111", a2)
 # 合并单元格并格式化输出
 worksheet.merge_range("A2:B2", "陈涛", a)
 workbook.close()

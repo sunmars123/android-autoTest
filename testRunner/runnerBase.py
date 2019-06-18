@@ -47,6 +47,10 @@ class TestInterfaceCase(unittest.TestCase):
     '''
     def tearDown(self):
         self.driver.close_app()
+
+    def quitApp(self):
+        apk_base = apkBase.apkInfo(common.APKPATH)
+        apk_base.clearApp()
     '''
     运行完成当前测试模块后运行
     '''

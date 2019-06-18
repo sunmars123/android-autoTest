@@ -31,3 +31,5 @@ class apkInfo():
         :return:activity
         '''
         return self.appinfo.get_apk_activity()
+    def clearApp(self):
+        return self.appinfo.clearApp()

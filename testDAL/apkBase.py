@@ -64,6 +64,11 @@ class ApkInfo():
             return result1[0]
         testLog.logger.error("未找到包名")
         return 0
+    def clearApp(self):
+        testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
+        cmd = 'adb shell pm clear %s' % self.get_apk_pkg()
+        os.popen(cmd, 'r')
+
 # if __name__ == '__main__':
 #     ApkInfo(r"D:\app\appium_study\img\t.apk").get_apk_pkg()
 #     # ApkInfo(r"D:\app\appium_study\img\t.apk").get_apk_version()

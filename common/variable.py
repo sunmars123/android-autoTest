@@ -48,7 +48,7 @@ class GetVariable(object):
     TAP = "tap"
 
     FIND_STR = "find_str"
-    WAIT_TIME = 10
+    WAIT_TIME = 5
 
     # 配置文件地址
     COMMONELEMENT = "../img/demo.xlsx"

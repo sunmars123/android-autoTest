@@ -15,6 +15,7 @@ from common.commonElemnt import Element as element
 import sys
 from common import logger
 testLog = logger.Logger("../../../Logs/all.log", level="debug")
+ce = element(common.COMMONELEMENT)
 class AppCase():
     def __init__(self, **kwargs):
         '''
@@ -41,6 +42,8 @@ class AppCase():
                 self.GetAppCaseInfo.test_describe = gh[i].get("test_describe", "false")
                 # self.GetAppCaseInfo.test_module = gh[i].get("test_module", "false")
                 # bt = self.GetAppCase
+            # self.GetAppCase.ch_check = gh[i].get("ch_check", "false")
+            self.GetAppCase.ch_check = get_check(gh[i].get("ch_check","false"))
             self.GetAppCase.element_info = gh[i].get("element_info", "false")
             self.GetAppCase.element_id = gh[i].get("element_id", "false")
             self.GetAppCase.enable = gh[i].get("enable", "false")
@@ -71,9 +74,7 @@ class AppCase():
         '''
         bc = self.getModeList(f)
         go = bo.OperateElement(self.driver)
-        ce = element(common.COMMONELEMENT)
         _d_report_common = {"test_success": 0, "test_failed": 0, "test_sum": 0}  # case的运行次数
-        ch_check = {}
         _d_report_common['test_sum'] += 1
         result = True
         for k in bc:
@@ -83,8 +84,14 @@ class AppCase():
                     k = ce.joinElement(k, k["element_id"])
                     if k["enable"] == 1:
                         testLog.logger.debug("执行步骤:{0}".format(k))
-                        go.opearate_element(k)
-                        # if go.findElement(ch_check):
+                        if go.opearate_element(k) is False:
+                            result = False
+                            break
+                        if k['operate_type'] != 'send_keys':
+                            if go.findElement(k['ch_check']) is False:
+                                self.GetAppCaseInfo.test_reason = '操作步骤{0}执行检查点{0}未通过'.format(k, k['ch_check'])
+                                result = False
+                                break
                         #     pass
                         # else:
                         #     self.report(go, k, _d_report_common, kwargs)
@@ -93,7 +100,8 @@ class AppCase():
                     else:
                         print("元素{0}enable为{1}不被启用".format(k["element_id"], k["enable"]))
                 else:
-                    print("操作元素不存在")
+                    testLog.logger.error("操作元素{0}不存在".format(k))
+                    break
             else:
                 if ce.isElemnet(k["element_id"]):
                     k = ce.joinElement(k, k["element_id"])
@@ -106,51 +114,29 @@ class AppCase():
         # time.sleep(5)
 
         # return True
-        self.report(go, ch_check, _d_report_common, kwargs)
+        self.report(go, result, _d_report_common, kwargs)
     # 整体用例运行
-    def report(self, go, ch_check, _d_report_common, kwargs):
+    def report(self, go, result, _d_report_common, kwargs):
         testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
-        testLog.logger.debug("==> param:{0},{1},{2},{3}".format(go, ch_check, _d_report_common, kwargs))
-        if go.findElement(ch_check):
+        testLog.logger.debug("==> param:{0},{1},{2},{3}".format(go, result, _d_report_common, kwargs))
+        if result:
             _d_report_common["test_success"] += 1
             self.GetAppCaseInfo.test_result = "成功"
             self.write_report_collect(_d_report_common, f=common.REPORT_COLLECT_PATH)  # 写入case运行的总个数
-            self.GetAppCaseInfo.test_image = None
-            self.GetAppCaseInfo.test_reason = ""
+            # self.GetAppCaseInfo.test_reason = ""
         else:
             _d_report_common['test_failed'] += 1
             self.GetAppCaseInfo.test_result = "失败"
-            self.GetAppCaseInfo.test_reason = "找不到元素"
+            # self.GetAppCaseInfo.test_reason = "找不到元素"
             self.write_report_collect(_d_report_common, f=common.REPORT_COLLECT_PATH)  # 写入case运行的总个数
-            ng_img = testLogScreen.screenshotNG(caseName=kwargs["test_name"], driver=self.driver,
-                                                resultPath=common.SCREEN_IMG_PATH)
-            self.GetAppCaseInfo.test_image = ng_img
+        ng_img = testLogScreen.screenshotNG(caseName=kwargs["test_name"], driver=self.driver,
+                                            resultPath=common.SCREEN_IMG_PATH)
+        self.GetAppCaseInfo.test_image = ng_img
         self.GetAppCaseInfo.test_name = kwargs["test_name"]
         self.GetAppCaseInfo.test_module = self.test_module
         # self.GetAppCaseInfo.test_phone_name = self.get_phone_name()[0]
         info_case = json.loads(json.dumps(self.GetAppCaseInfo().to_primitive()))
         self.write_detail(info_case, f=common.REPORT_INFO_PATH, key="info")  # 写入所有的case包括，init,info中的excel中的case情况
-    # 整体用例运行
-    # def report(self, _d_report_common, kwargs, result):
-    #     if result:
-    #         _d_report_common["test_success"] += 1
-    #         self.GetAppCaseInfo.test_result = "成功"
-    #         self.write_report_collect(_d_report_common, f=common.REPORT_COLLECT_PATH)  # 写入case运行的总个数
-    #         self.GetAppCaseInfo.test_image = None
-    #         self.GetAppCaseInfo.test_reason = ""
-    #     else:
-    #         _d_report_common['test_failed'] += 1
-    #         self.GetAppCaseInfo.test_result = "失败"
-    #         self.GetAppCaseInfo.test_reason = "找不到元素"
-    #         self.write_report_collect(_d_report_common, f=common.REPORT_COLLECT_PATH)  # 写入case运行的总个数
-    #         ng_img = testLogScreen.screenshotNG(caseName=kwargs["test_name"], driver=self.driver,
-    #                                             resultPath=common.SCREEN_IMG_PATH)
-    #         self.GetAppCaseInfo.test_image = ng_img
-    #     self.GetAppCaseInfo.test_name = kwargs["test_name"]
-    #     self.GetAppCaseInfo.test_module = self.test_module
-    #     # self.GetAppCaseInfo.test_phone_name = self.get_phone_name()[0]
-    #     info_case = json.loads(json.dumps(self.GetAppCaseInfo().to_primitive()))
-    #     self.write_detail(info_case, f=common.REPORT_INFO_PATH, key="info")  # 写入所有的case包括，init,info中的excel中的case情况
     '''
     读取文件执行结果
     '''
@@ -202,6 +188,17 @@ class AppCase():
             op.write_txt(str(_result))
         else:
             op.write_txt(str(json))
+def get_check(ch_checkId):
+    if ch_checkId is not None:
+        if ce.isElemnet(ch_checkId):
+            ch_check = {'element_id': ch_checkId}
+            ch_check = ce.joinElement(ch_check,ch_check['element_id'])
+            return ch_check
+        else:
+            testLog.logger.error("检查点标记元素{0}不存在".format(ch_checkId))
+            return 0
+    return ch_checkId
+
     #写入统计case的info，init情况
     # def write_detail
 # b = AppCase(GetAppCaseInfo=appCase.GetAppCaseInfo, package="123", devices="456", GetAppCase=appCase.GetAppCase)

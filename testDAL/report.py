@@ -26,9 +26,9 @@ class OperateReport:
         worksheet.set_row(6, 30)
 
          # 设置默认格式边框线长度1、加粗18大小字体
-        define_format_H1 = get_format(self.wd, {'bold': True, 'font_size': 18, 'border':1, 'align':'center'})
+        define_format_H1 = get_format(self.wd, {'bold': True, 'font_size': 18, 'border':1, 'align':'center', 'text_wrap':True})
          # 设置默认格式加粗14大小字体
-        define_format_H2 = get_format(self.wd, {'bold': True, 'font_size': 14, 'border':1, 'align':'center', 'color':'#ffffff', 'bg_color':"blue"})
+        define_format_H2 = get_format(self.wd, {'bold': True, 'font_size': 14, 'border':1, 'align':'center', 'color':'#ffffff', 'bg_color':"blue", 'text_wrap':True})
 
         # define_format_H2.set_border(1)
         # define_format_H1.set_align("center")
@@ -95,7 +95,7 @@ class OperateReport:
 
 
         #合并单元格并键入内容
-        worksheet.merge_range('A1:H1', '测试详情', get_format(self.wd, {'bold': True, 'font_size': 18 ,'align': 'center','valign': 'vcenter','bg_color': 'blue', 'font_color': '#ffffff'}))
+        worksheet.merge_range('A1:H1', '测试详情', get_format(self.wd, {'bold': True, 'font_size': 18 ,'align': 'center','valign': 'vcenter','bg_color': 'blue', 'font_color': '#ffffff', 'text_wrap':True}))
         #根据默认格式进入内容
         _write_center(worksheet, "A2", '用例ID', self.wd)
         _write_center(worksheet, "B2", '模块', self.wd)
@@ -151,7 +151,7 @@ def get_format(wd, option={}):
 获取单元格默认格式对象
 '''
 def get_format_center(wd, num=1):
-    return wd.add_format({'align': 'center','valign': 'vcenter','border':num})
+    return wd.add_format({'align': 'center','valign': 'vcenter','border':num, 'text_wrap':True})
 
 '''
 单元格写入内容并附带默认格式

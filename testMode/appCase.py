@@ -22,7 +22,7 @@ class GetAppCase(Model):
     index = IntType()
     data_input = StringType()# 输入信息
     log = StringType() # 本地log信息路径，一般由手机名字_型号构成
-
+    ch_check = StringType() #检查点信息
 '''
 用例的基本信息
 '''
