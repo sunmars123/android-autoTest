@@ -1,0 +1,8 @@
+---
+-
+  test_no: 1
+  test_describe: 正常用户密码登录白云生
+  test_module: 快速登录
+  type: 1
+  assembly_path: ../img/login01.yaml
+  enable: 1

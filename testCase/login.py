@@ -30,7 +30,7 @@ class testLogin(te):
 
     # 单点登陆这里特殊处理,不同的设备调用不同的case
     def home_login01(self):
-        home_logon_yaml = PATH("yaml/bys/login/login01.yaml")
+        home_logon_yaml = PATH("yaml/bys/login/test.yaml")
         self.bc.execCase(home_logon_yaml, test_name="home_login01", isLast="0", test_module='快速登录')
     def home_login02(self):
         home_logon_yaml = PATH("yaml/bys/login/login02.yaml")

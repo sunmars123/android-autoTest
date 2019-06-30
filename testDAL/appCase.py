@@ -29,7 +29,7 @@ class AppCase():
         self.test_module = kwargs['test_module']
         self.GetAppCaseInfo = kwargs['GetAppCaseInfo']
         self.GetAppCase = kwargs["GetAppCase"]
-        # self.test_module = kwargs['test_module']
+        self.test_module = kwargs['test_module']
         self.driver = kwargs["driver"]
     def getModeList(self, f):
         testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
@@ -37,30 +37,45 @@ class AppCase():
         bs = []
         gh = operateYaml.getYam(f)
         for i in range(len(gh)):
-            if i  == 0 :
-                self.GetAppCaseInfo.test_no = gh[i].get("test_no", "false")
-                self.GetAppCaseInfo.test_describe = gh[i].get("test_describe", "false")
-                # self.GetAppCaseInfo.test_module = gh[i].get("test_module", "false")
-                # bt = self.GetAppCase
-            # self.GetAppCase.ch_check = gh[i].get("ch_check", "false")
-            self.GetAppCase.ch_check = get_check(gh[i].get("ch_check","false"))
-            self.GetAppCase.element_info = gh[i].get("element_info", "false")
-            self.GetAppCase.element_id = gh[i].get("element_id", "false")
-            self.GetAppCase.enable = gh[i].get("enable", "false")
-            self.GetAppCase.index = gh[i].get("index", "false")
-            # 操作类型
-            self.GetAppCase.operate_type = gh[i].get("operate_type", "false")
-            # 输入文字
-            self.GetAppCase.data_input = gh[i].get("data_input", "false")  # 对应by_link_text
+            if gh[i].get("type","false") != 1:
+                if i  == 0 :
+                    self.GetAppCaseInfo.test_no = gh[i].get("test_no", "false")
+                    self.GetAppCaseInfo.test_describe = gh[i].get("test_describe", "false")
+                    # self.GetAppCaseInfo.test_module = gh[i].get("test_module", "false")
+                    # bt = self.GetAppCase
+                # self.GetAppCase.ch_check = gh[i].get("ch_check", "false")
+                self.GetAppCase.ch_check = get_check(gh[i].get("ch_check","false"))
+                self.GetAppCase.element_info = gh[i].get("element_info", "false")
+                self.GetAppCase.element_id = gh[i].get("element_id", "false")
+                self.GetAppCase.enable = gh[i].get("enable", "false")
+                self.GetAppCase.index = gh[i].get("index", "false")
+                # 操作类型
+                self.GetAppCase.operate_type = gh[i].get("operate_type", "false")
+                # 输入文字
+                self.GetAppCase.data_input = gh[i].get("data_input", "false")  # 对应by_link_text
 
-            # 验证类型
-            self.GetAppCase.find_type = gh[i].get("find_type", "false")
+                # 验证类型
+                self.GetAppCase.find_type = gh[i].get("find_type", "false")
 
-            self.GetAppCase.time = gh[i].get("time", 0)
+                self.GetAppCase.time = gh[i].get("time", 0)
+                self.GetAppCase.type = gh[i].get("type", 0)
+            else:
+                if i  == 0 :
+                    self.GetAppCaseInfo.test_no = gh[i].get("test_no", "false")
+                    self.GetAppCaseInfo.test_describe = gh[i].get("test_describe", "false")
+                    self.GetAppCase.enable = gh[i].get("enable", "false")
+                    self.GetAppCase.assembly_path = gh[i].get("assembly_path", "false")
+                    self.GetAppCase.type = gh[i].get("type", 0)
+                else:
+                    pass
+
 
             bs.append(json.loads(json.dumps(self.GetAppCase().to_primitive())))
         testLog.logger.debug("testConter:{0}".format(bs))
+        print(bs)
+        testLog.logger.debug("testConter:2")
         return bs
+
     def execCase(self, f, **kwargs):
         testLog.logger.debug("run function ==> %s" % sys._getframe().f_code.co_name)
         testLog.logger.debug("==> param:{0},{1}".format(f, kwargs))
@@ -73,13 +88,14 @@ class AppCase():
         :return:
         '''
         bc = self.getModeList(f)
+        print(1)
         go = bo.OperateElement(self.driver)
+        print(2)
         _d_report_common = {"test_success": 0, "test_failed": 0, "test_sum": 0}  # case的运行次数
         _d_report_common['test_sum'] += 1
         result = True
         for k in bc:
-            if k["operate_type"] != "false" and 1 == 1:
-                # k["devices"] = self.devices
+            if k['type'] == 0:
                 if ce.isElemnet(k["element_id"]):
                     k = ce.joinElement(k, k["element_id"])
                     if k["enable"] == 1:
@@ -92,28 +108,34 @@ class AppCase():
                                 self.GetAppCaseInfo.test_reason = '操作步骤{0}执行检查点{0}未通过'.format(k, k['ch_check'])
                                 result = False
                                 break
-                        #     pass
-                        # else:
-                        #     self.report(go, k, _d_report_common, kwargs)
-                        # if go.findElement(ch_check) is False:
-                        #     return False
                     else:
                         print("元素{0}enable为{1}不被启用".format(k["element_id"], k["enable"]))
                 else:
+                    result = False
                     testLog.logger.error("操作元素{0}不存在".format(k))
                     break
             else:
-                if ce.isElemnet(k["element_id"]):
-                    k = ce.joinElement(k, k["element_id"])
-                    if k["enable"] == 1:
-                        ch_check = k
-                    else:
-                        print("元素{0}enable为{1}不被启用".format(k["element_id"], k["enable"]))
-                else:
-                    print("验证元素不存在")
-        # time.sleep(5)
-
-        # return True
+                if k["assembly_path"] is not None:
+                    bc2 = self.getModeList(k["assembly_path"])
+                    testLog.logger.debug("执行组件:{0}".format(bc2))
+                    for k2 in bc2:
+                        if ce.isElemnet(k2["element_id"]):
+                            k2 = ce.joinElement(k2, k2["element_id"])
+                            if k2["enable"] == 1:
+                                if go.opearate_element(k2) is False:
+                                    result = False
+                                    break
+                                if k2['operate_type'] != 'send_keys':
+                                    if go.findElement(k2['ch_check']) is False:
+                                        self.GetAppCaseInfo.test_reason = '操作步骤{0}执行检查点{0}未通过'.format(k2, k2['ch_check'])
+                                        result = False
+                                        break
+                            else:
+                                print("元素{0}enable为{1}不被启用".format(k2["element_id"], k["enable"]))
+                        else:
+                            testLog.logger.error("操作元素{0}不存在".format(k2))
+                            result = False
+                            break
         self.report(go, result, _d_report_common, kwargs)
     # 整体用例运行
     def report(self, go, result, _d_report_common, kwargs):

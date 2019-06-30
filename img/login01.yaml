@@ -1,0 +1,24 @@
+---
+-
+  element_id: BYS_home_rapidenrollment_Editbox_phone
+  operate_type: send_keys
+  test_no: 1
+  test_describe: 正常用户密码登录白云生
+  data_input: 18516007056
+  test_module: 快速登录
+  ch_check:
+-
+  element_id: BYS_home_rapidenrollment_Button_next
+  operate_type: click
+  data_input:
+  ch_check: BYS_home_rapidenrollment_Editbox_password
+-
+  element_id: BYS_home_rapidenrollment_Editbox_password
+  operate_type: send_keys
+  data_input: Ct123456
+  ch_check:
+-
+  element_id: BYS_home_rapidenrollment_Button_login
+  operate_type: click
+  data_input:
+  ch_check: BYS_bill_non-payment _Button_ Temporarypassword
