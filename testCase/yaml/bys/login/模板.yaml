@@ -1,0 +1,14 @@
+---
+-
+  element_id: 
+  operate_type: 
+  test_no: 
+  test_describe: 
+  data_input: 
+  test_module: 
+  ch_check:
+-
+  element_id: BYS_home_rapidenrollment_Button_next
+  operate_type: click
+  data_input:
+  ch_check: BYS_home_rapidenrollment_Editbox_password
