@@ -29,15 +29,9 @@ class testLogin(te):
     #     self.bc.execCase(PATH("yaml/myinfo/home_feed.yaml"), test_name="test_home_feed", isLast="1")
 
     # 单点登陆这里特殊处理,不同的设备调用不同的case
-    def home_login01(self):
-        home_logon_yaml = PATH("yaml/bys/login/test.yaml")
-        self.bc.execCase(home_logon_yaml, test_name="home_login01", isLast="0", test_module='快速登录')
-    def home_login02(self):
-        home_logon_yaml = PATH("yaml/bys/login/login02.yaml")
-        self.bc.execCase(home_logon_yaml, test_name="home_login01", isLast="0", test_module='快速登录')
-    def home_login03(self):
-        home_logon_yaml = PATH("yaml/bys/login/login03.yaml")
-        self.bc.execCase(home_logon_yaml, test_name="home_login01", isLast="0", test_module='快速登录')
+    def login01(self):
+        logon_yaml = PATH("yaml/bys/login/test1.yaml")
+        self.bc.execCase(logon_yaml, test_name="login01", isLast="0", test_module='快速登录')
     # 测试用例执行完后所需执行的操作
     def tearDown(self):
         self.quitApp()
@@ -47,7 +41,7 @@ class testLogin(te):
     def tearDownClass():
         pass
     def test_login01(self):
-        self.home_login01()
+        self.login01()
     # def test_login02(self):
     #     self.home_login02()
     # def test_login03(self):

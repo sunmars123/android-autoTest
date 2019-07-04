@@ -20,14 +20,3 @@ def getYam(homeyaml):
 '''
 获取元素公共id，查找到元素库内容
 '''
-# def getElement(homeyaml):
-#     x = getYam(homeyaml)
-# x = getYam("../img/element.yaml")
-# print(x)
-# def add(a, b):
-#     d = {
-#     "a" : lambda : a+b ,
-#     'b': 456
-#     }
-#     return d['a']()
-# print(add(1,2))
