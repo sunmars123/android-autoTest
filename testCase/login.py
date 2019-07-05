@@ -30,7 +30,7 @@ class testLogin(te):
 
     # 单点登陆这里特殊处理,不同的设备调用不同的case
     def login01(self):
-        logon_yaml = PATH("yaml/bys/login/test1.yaml")
+        logon_yaml = PATH("yaml/ly/login/login01.yaml")
         self.bc.execCase(logon_yaml, test_name="login01", isLast="0", test_module='快速登录')
     # 测试用例执行完后所需执行的操作
     def tearDown(self):

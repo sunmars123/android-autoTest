@@ -13,5 +13,3 @@ PATH = lambda p: os.path.abspath(
 print(PATH(""))
 # 返回当前路径
 print(os.path.dirname(__file__))
-print(PATH("yaml/login/home_login.yaml"))
-print(os.path.join(os.path.dirname(__file__), "yaml/login/home_login.yaml"))

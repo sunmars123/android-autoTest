@@ -2,17 +2,18 @@
 -
   element_id: LYO_login_Editbox_phone
   operate_type: send_keys
-  test_no: 2
-  test_describe: 登录
-  data_input: 17673637740
-  test_module: 我的
+  test_no: 51
+  test_describe: 未注册用户登录联寓运营
+  data_input: 18516007055
+  test_module: 登录
+  ch_check:
 -
   element_id: LYO_login_Editbox_password
   operate_type: send_keys
   data_input: Ct123456
+  ch_check:
 -
   element_id: LYO_login_Button_login
   operate_type: click
   data_input:
--
-  element_id: LYO_login_SelectOperator_Button_SelectOperator
+  ch_check: LYO_login_Button_login

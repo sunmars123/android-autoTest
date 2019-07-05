@@ -220,9 +220,3 @@ def get_check(ch_checkId):
             testLog.logger.error("检查点标记元素{0}不存在".format(ch_checkId))
             return 0
     return ch_checkId
-
-    #写入统计case的info，init情况
-    # def write_detail
-# b = AppCase(GetAppCaseInfo=appCase.GetAppCaseInfo, package="123", devices="456", GetAppCase=appCase.GetAppCase)
-# s = b.getModeList(os.getcwd()+"\home_login.yaml")
-# print("s:",s)
