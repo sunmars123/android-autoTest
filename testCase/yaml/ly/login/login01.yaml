@@ -1,11 +1,14 @@
 ---
 -
-  element_id: LYO_login_Editbox_phone
-  operate_type: send_keys
   test_no: 51
   test_describe: 未注册用户登录联寓运营
-  data_input: 18516007055
   test_module: 登录
+  type: 1
+  assembly_path: ../img/swipe.yaml
+-
+  element_id: LYO_login_Editbox_phone
+  operate_type: send_keys
+  data_input: 18516007055
   ch_check:
 -
   element_id: LYO_login_Editbox_password

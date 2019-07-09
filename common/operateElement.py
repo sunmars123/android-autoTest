@@ -54,13 +54,20 @@ class OperateElement():
                 common.CLICK : lambda :opearte_click(mOperate, self.driver),
                 common.SEND_CODE : lambda  :send_code(),
                 common.SEND_KEYS : lambda  :send_keys(mOperate, self.driver),
-                common.SWIPELEFT : lambda  :operate_swipe_left(mOperate, self.driver),
+                # common.SWIPELEFT : lambda  :operate_swipe_left(self.driver),
             }
             return elements[mOperate["operate_type"]]()
         return False
     def getElementText(self, mOperate):
         # get_attributeName(mOperate, self.driver)
         return self.driver.find_element_by_id(mOperate["element_info"]).text
+
+    def operate_swipe_left(self):
+        l = get_size(self.driver)
+        x1 = int(l[0] * 0.9)
+        y1 = int(l[1] * 0.5)
+        x2 = int(l[0] * 0.1)
+        self.driver.swipe(x1, y1, x2, y1, 400)
 
 def elements_by(mOperate, cts):
     # print(len(cts.find_elements_by_class_name(mOperate['element_info'])[mOperate['index']]))
@@ -107,9 +114,6 @@ def opearte_click(mOperate, cts):
 '''
 左滑操作 暂未开发
 '''
-def operate_swipe_left(mOperate, cts):
-    time.sleep(1)
-
 
 '''
 通过字典的定位类型执行输入操作，值提取字典钟的text文本
@@ -139,4 +143,8 @@ def get_attributeName(mOperate, cts):
         print(x.text)
         print(x.get_attribute)
         return x.text
-
+def get_size(cts):
+    print(cts.get_window_size())
+    x = cts.get_window_size()['width']
+    y = cts.get_window_size()['height']
+    return (x,y)

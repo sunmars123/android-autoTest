@@ -37,7 +37,26 @@ class AppCase():
         bs = []
         gh = operateYaml.getYam(f)
         for i in range(len(gh)):
-            if gh[i].get("type","false") != 1:
+            if gh[i].get("element_id","false") == 'admin':
+                if i  == 0 :
+                    self.GetAppCaseInfo.test_no = gh[i].get("test_no", "false")
+                    self.GetAppCaseInfo.test_describe = gh[i].get("test_describe", "false")
+                self.GetAppCase.ch_check = gh[i].get("ch_check","false")
+                self.GetAppCase.element_info = gh[i].get("element_info", "false")
+                self.GetAppCase.element_id = gh[i].get("element_id", "false")
+                self.GetAppCase.enable = gh[i].get("enable", "false")
+                self.GetAppCase.index = gh[i].get("index", "false")
+                # 操作类型
+                self.GetAppCase.operate_type = gh[i].get("operate_type", "false")
+                # 输入文字
+                self.GetAppCase.data_input = gh[i].get("data_input", "false")  # 对应by_link_text
+
+                # 验证类型
+                self.GetAppCase.find_type = gh[i].get("find_type", "false")
+
+                self.GetAppCase.time = gh[i].get("time", 0)
+                self.GetAppCase.type = gh[i].get("type", 0)
+            elif gh[i].get("type","false") != 1:
                 if i  == 0 :
                     self.GetAppCaseInfo.test_no = gh[i].get("test_no", "false")
                     self.GetAppCaseInfo.test_describe = gh[i].get("test_describe", "false")
@@ -68,12 +87,8 @@ class AppCase():
                     self.GetAppCase.type = gh[i].get("type", 0)
                 else:
                     pass
-
-
             bs.append(json.loads(json.dumps(self.GetAppCase().to_primitive())))
         testLog.logger.debug("testConter:{0}".format(bs))
-        print(bs)
-        testLog.logger.debug("testConter:2")
         return bs
 
     def execCase(self, f, **kwargs):
@@ -119,7 +134,9 @@ class AppCase():
                     bc2 = self.getModeList(k["assembly_path"])
                     testLog.logger.debug("执行组件:{0}".format(bc2))
                     for k2 in bc2:
-                        if ce.isElemnet(k2["element_id"]):
+                        if k2['element_id'] == 'admin':
+                            go.operate_swipe_left()
+                        elif ce.isElemnet(k2["element_id"]):
                             k2 = ce.joinElement(k2, k2["element_id"])
                             if k2["enable"] == 1:
                                 if go.opearate_element(k2) is False:

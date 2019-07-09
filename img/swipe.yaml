@@ -1,0 +1,24 @@
+---
+-
+  element_id: admin
+  operate_type: swipeLeft
+  test_no: common
+  test_describe: 进入引导页
+  data_input:
+  test_module: 引导
+  ch_check:
+-
+  element_id: admin
+  operate_type: swipeLeft
+  data_input:
+  ch_check:
+-
+  element_id: admin
+  operate_type: swipeLeft
+  data_input:
+  ch_check:
+-
+  element_id: LYO_login_Button_start
+  operate_type: click
+  data_input:
+  ch_check: LYO_login_Editbox_phone
